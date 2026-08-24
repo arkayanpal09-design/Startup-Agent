@@ -2,7 +2,7 @@ $PSScriptRootLocation = Split-Path -Parent $PSScriptRoot
 $ProjectRoot = $PSScriptRootLocation
 
 $PythonVirtualEnv = "$ProjectRoot\backend\.venv"
-$PythonExe = "$PythonVirtualEnv\Scripts\python.exe"
+$PythonExe = "$PythonVirtualEnv\Scripts\pythonw.exe"
 $StartupScript = "$ProjectRoot\backend\startup.py"
 
 Write-Host "Installing NOVA Personal PC Agent..." -ForegroundColor Cyan
@@ -22,8 +22,6 @@ $Action = New-ScheduledTaskAction -Execute "$PythonExe" -Argument "$StartupScrip
 $Trigger = New-ScheduledTaskTrigger -AtLogOn
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
-$Principal = New-ScheduledTaskPrincipal -LogonType Interactive -RunLevel LeastPrivilege
-
-Register-ScheduledTask -TaskName "NOVA Personal PC Agent" -Action $Action -Trigger $Trigger -Principal $Principal -Settings $Settings -Force | Out-Null
+Register-ScheduledTask -TaskName "NOVA Personal PC Agent" -Action $Action -Trigger $Trigger -Settings $Settings -Force
 
 Write-Host "Success! The scheduled task 'NOVA Personal PC Agent' has been installed." -ForegroundColor Green

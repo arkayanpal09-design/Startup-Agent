@@ -148,20 +148,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const fetchConfig = async () => {
         try {
-            const config = (await fetch('/api/startup/config')).json();
-            const data = await config;
+            const data = await APIService.getStartupConfig();
             // Support both old and new schema keys gracefully bridging JSON
-            elConfigEnabled.checked = data.startup_enabled ?? data.enabled;
-            elConfigDelay.value = data.startup_delay_seconds ?? data.startup_delay;
+            elConfigEnabled.checked = data.startup_enabled ?? data.enabled ?? false;
+            elConfigDelay.value = (data.startup_delay_seconds ?? data.startup_delay ?? 0).toString();
             elConfigWaitNetwork.checked = data.wait_for_network;
-            elConfigNetTimeout.value = data.network_timeout_seconds ?? data.network_timeout;
-            elConfigNetRetry.value = data.network_retry_interval_seconds ?? data.retry_interval;
+            elConfigNetTimeout.value = (data.network_timeout_seconds ?? data.network_timeout ?? 60).toString();
+            elConfigNetRetry.value = (data.network_retry_interval_seconds ?? data.retry_interval ?? 5).toString();
              
             // Setup Profile Select Options
             try {
-                const pdata = await (await fetch('/api/browser/profiles')).json();
+                const profiles = await APIService.getChromeProfiles();
                 elConfigProfile.innerHTML = "";
-                pdata.profiles.forEach((p: any) => {
+                profiles.forEach((p: any) => {
                     const opt = document.createElement("option");
                     opt.value = p.name;
                     opt.innerText = p.display_name;
@@ -170,9 +169,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             } catch(e) {}
             
             elConfigProfile.value = data.chrome_profile ?? "Default";
-            elConfigUrls.value = (data.startup_urls ?? data.startup_websites).join(", ");
+            const urls = data.startup_urls ?? data.startup_websites ?? [];
+            elConfigUrls.value = Array.isArray(urls) ? urls.join(", ") : "";
         } catch (e) {
-            console.error("Failed to load config.");
+            console.error("Failed to load config.", e);
         }
     };
 
