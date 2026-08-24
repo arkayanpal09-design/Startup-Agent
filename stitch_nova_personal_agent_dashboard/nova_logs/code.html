@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activity Logs - NOVA Agent</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#0b1c30",
+                      "on-primary-container": "#00285d",
+                      "inverse-on-surface": "#313030",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-container-low": "#1c1b1b",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary": "#4edea3",
+                      "error": "#ffb4ab",
+                      "outline": "#8c909f",
+                      "on-primary": "#002e6a",
+                      "surface-container-highest": "#353534",
+                      "inverse-primary": "#005ac2",
+                      "on-surface-variant": "#c2c6d6",
+                      "tertiary-fixed": "#d3e4fe",
+                      "on-tertiary": "#213145",
+                      "secondary-container": "#00a572",
+                      "tertiary-container": "#8292aa",
+                      "surface": "#131313",
+                      "primary": "#adc6ff",
+                      "background": "#131313",
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "on-surface": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "outline-variant": "#424754",
+                      "tertiary": "#b7c8e1",
+                      "on-primary-fixed": "#001a42",
+                      "surface-tint": "#adc6ff",
+                      "on-secondary-container": "#00311f",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-tertiary-container": "#1a2b3e",
+                      "surface-container": "#201f1f",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-background": "#e5e2e1",
+                      "surface-variant": "#353534",
+                      "surface-container-high": "#2a2a2a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-dim": "#131313",
+                      "on-error": "#690005",
+                      "surface-bright": "#3a3939",
+                      "primary-container": "#4d8eff",
+                      "on-primary-fixed-variant": "#004395",
+                      "on-secondary-fixed": "#002113",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-secondary": "#003824",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#d8e2ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "0.5rem",
+                      "sm": "1rem",
+                      "margin-mobile": "16px",
+                      "md": "1.5rem",
+                      "xl": "4rem",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "lg": "2.5rem",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "caption": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-mono": ["JetBrains Mono"],
+                      "display-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-mono": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .terminal-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked left-0 h-full w-64 border-r border-white/10 shadow-xl flex flex-col fixed left-0 top-0 py-lg px-sm z-50">
+<!-- Header -->
+<div class="mb-xl px-sm flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+</div>
+<div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary tracking-tighter" style="font-size: 24px; line-height: 1;">NOVA</h1>
+<p class="font-caption text-caption text-on-surface-variant">AI PC Agent</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Startup</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">apps</span>
+<span>Apps</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">browser_updated</span>
+<span>Browser</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span>Tasks</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-primary font-bold border-r-2 border-primary bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span>Logs</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<!-- CTA & Footer -->
+<div class="mt-auto flex flex-col gap-md pt-lg border-t border-white/5">
+<button class="w-full py-xs px-sm rounded-lg bg-surface-container-high border border-white/10 text-error hover:bg-error/10 transition-colors font-body-md text-body-md flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined">stop_circle</span>
+                Stop Agent
+            </button>
+<div class="flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span>Status</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col h-screen bg-background relative">
+<!-- TopAppBar -->
+<header class="bg-background/50 dark:bg-background/50 backdrop-blur-md border-b border-white/5 flex justify-between items-center px-margin-desktop h-20 w-full z-40">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Good Morning</h2>
+</div>
+<div class="flex items-center gap-lg">
+<!-- Search -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-[#000000] border border-white/10 rounded-full py-2 pl-10 pr-4 text-on-surface font-label-mono text-label-mono focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all placeholder:text-on-surface-variant" placeholder="Search logs..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-xs">
+<button class="hover:bg-white/10 rounded-full p-2 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-white/10 rounded-full p-2 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:bg-white/10 rounded-full p-2 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-white/10 ml-2 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-hidden p-margin-desktop flex flex-col gap-lg">
+<!-- Page Header & Controls -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Activity Logs</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time system telemetry and agent actions.</p>
+</div>
+<div class="flex gap-sm">
+<!-- Filters -->
+<div class="flex bg-surface-container-high rounded-lg p-1 border border-white/10">
+<button class="px-sm py-1 rounded-md bg-white/10 text-on-surface font-caption text-caption transition-all">All</button>
+<button class="px-sm py-1 rounded-md text-on-surface-variant hover:text-on-surface font-caption text-caption transition-all">Info</button>
+<button class="px-sm py-1 rounded-md text-on-surface-variant hover:text-on-surface font-caption text-caption transition-all flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-secondary"></span>Success</button>
+<button class="px-sm py-1 rounded-md text-on-surface-variant hover:text-on-surface font-caption text-caption transition-all flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span>Error</button>
+</div>
+<button class="px-md py-2 rounded-lg bg-surface-container border border-white/10 text-on-surface hover:bg-white/5 transition-all font-caption text-caption flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                        Clear
+                    </button>
+<button class="px-md py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container transition-all font-caption text-caption font-bold flex items-center gap-xs shadow-[0_0_15px_rgba(173,198,255,0.2)]">
+<span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Terminal Console -->
+<div class="flex-1 glass-card rounded-xl overflow-hidden flex flex-col relative border-white/10">
+<!-- Terminal Header -->
+<div class="h-10 bg-surface-container-lowest border-b border-white/10 flex items-center px-sm gap-sm">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-error/80"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary-container/80"></div>
+<div class="w-3 h-3 rounded-full bg-secondary/80"></div>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant/50 ml-sm text-xs">nova-agent-core.log</span>
+<div class="ml-auto flex items-center gap-2">
+<div class="flex items-center gap-2 bg-secondary/10 px-2 py-1 rounded-full border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-mono text-label-mono text-secondary text-[10px]">LIVE</span>
+</div>
+</div>
+</div>
+<!-- Terminal Body -->
+<div class="flex-1 bg-[#050505] p-md overflow-y-auto terminal-scroll font-label-mono text-label-mono flex flex-col gap-1">
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:01]</span>
+<span class="text-primary shrink-0 w-16">[INFO]</span>
+<span class="text-on-surface">Agent startup sequence initiated. Checking hardware integration...</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:02]</span>
+<span class="text-secondary shrink-0 w-16">[OK]</span>
+<span class="text-on-surface-variant">Hardware integration verified. NPU allocated.</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:05]</span>
+<span class="text-primary shrink-0 w-16">[INFO]</span>
+<span class="text-on-surface">Loading user context profiles...</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:15]</span>
+<span class="text-tertiary shrink-0 w-16">[TASK]</span>
+<span class="text-on-surface">Received intent: <span class="text-tertiary-fixed">"Play background focus music"</span></span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:16]</span>
+<span class="text-primary shrink-0 w-16">[INFO]</span>
+<span class="text-on-surface-variant">Executing macro: launch_youtube_playlist(id='lofi_beats_01')</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:42:18]</span>
+<span class="text-secondary shrink-0 w-16">[SUCCESS]</span>
+<span class="text-on-surface">YouTube opened. Playlist playing. Audio routed to primary output.</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:45:00]</span>
+<span class="text-primary shrink-0 w-16">[INFO]</span>
+<span class="text-on-surface-variant">Performing routine memory garbage collection...</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors bg-error/5 border border-error/10">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:48:22]</span>
+<span class="text-error shrink-0 w-16">[WARN]</span>
+<span class="text-error">API rate limit approaching for background summarization service (85%).</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:50:12]</span>
+<span class="text-tertiary shrink-0 w-16">[TASK]</span>
+<span class="text-on-surface">Analyzing incoming email from <span class="text-tertiary-fixed">design_team@client.com</span>...</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:50:14]</span>
+<span class="text-secondary shrink-0 w-16">[OK]</span>
+<span class="text-on-surface-variant">Analysis complete. Added 3 action items to daily tracker.</span>
+</div>
+<div class="flex gap-4 group hover:bg-white/5 p-1 rounded transition-colors">
+<span class="text-on-surface-variant/40 shrink-0 w-24">[10:55:01]</span>
+<span class="text-primary shrink-0 w-16">[INFO]</span>
+<span class="text-on-surface">Awaiting instructions...</span>
+<span class="w-2 h-4 bg-primary inline-block ml-1 animate-pulse"></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

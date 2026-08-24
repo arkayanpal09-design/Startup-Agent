@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOVA - Applications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-primary-container": "#00285d",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#4edea3",
+                        "error": "#ffb4ab",
+                        "outline": "#8c909f",
+                        "on-primary": "#002e6a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#005ac2",
+                        "on-surface-variant": "#c2c6d6",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-tertiary": "#213145",
+                        "secondary-container": "#00a572",
+                        "tertiary-container": "#8292aa",
+                        "surface": "#131313",
+                        "primary": "#adc6ff",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "outline-variant": "#424754",
+                        "tertiary": "#b7c8e1",
+                        "on-primary-fixed": "#001a42",
+                        "surface-tint": "#adc6ff",
+                        "on-secondary-container": "#00311f",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary-container": "#1a2b3e",
+                        "surface-container": "#201f1f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "surface-bright": "#3a3939",
+                        "primary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#002113",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary": "#003824",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "margin-mobile": "16px",
+                        "md": "1.5rem",
+                        "xl": "4rem",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "lg": "2.5rem",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-mono": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #adc6ff;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #adc6ff;
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<nav class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-r border-white/10 shadow-xl flex flex-col h-screen fixed left-0 top-0 py-lg px-sm w-64 z-50">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="token">token</span>
+</div>
+<div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary tracking-tighter text-2xl">NOVA</h1>
+<p class="font-caption text-caption text-on-surface-variant">AI PC Agent</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span>Startup</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-primary font-bold border-r-2 border-primary bg-white/5 hover:bg-white/5 hover:text-primary transition-all scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="apps" data-weight="fill" style="font-variation-settings: 'FILL' 1;">apps</span>
+<span>Apps</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="browser_updated">browser_updated</span>
+<span>Browser</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>Tasks</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>Logs</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-sm border-t border-white/10 pt-sm">
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span>Status</span>
+</a>
+<button class="mt-sm w-full py-xs px-sm rounded-lg border border-error text-error hover:bg-error/10 transition-colors flex justify-center items-center gap-xs font-caption text-caption">
+<span class="material-symbols-outlined text-[16px]" data-icon="stop_circle">stop_circle</span>
+                Stop Agent
+            </button>
+</div>
+</nav>
+<main class="ml-64 w-[calc(100%-16rem)] flex flex-col min-h-screen">
+<header class="bg-background/50 dark:bg-background/50 backdrop-blur-md border-b border-white/5 flex justify-between items-center px-margin-desktop h-20 sticky top-0 z-40">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Good Morning</h2>
+</div>
+<div class="flex items-center gap-sm">
+<div class="relative hidden md:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-surface-container-high border border-white/10 rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-label-mono text-label-mono w-64 placeholder-on-surface-variant transition-all" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover ml-sm border border-white/10 cursor-pointer" data-alt="A futuristic minimalist avatar profile image featuring a stylized geometric face in glowing cyan and deep indigo tones. The lighting is soft and cinematic, set against a dark void background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnmpcxjZbWHXCUQ7S83tXB400a9PbcoyfDVQ6wkmWm-PEb9xnCzV0cNU0lGdeCvARCHAwqJbbUSqH64Hb93kYoZ49OiLdNJhj3Biozf4He6ZMZL3IwclVnFaVVQKNEouA-rt9vdeHGsgWrf_co-1z7LAsvCSN2OH0044qI-Uj4VCbNs9S2XfnGaLdV4ESjg-IuXlgpLwJWXd3D-TG3C2zEFq7bdHFetJF6CYZi1gkRxSMNpnP1n8ddQg"/>
+</div>
+</header>
+<div class="flex-1 px-margin-desktop py-xl">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-xl gap-sm">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Applications</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage applications that NOVA can launch.</p>
+</div>
+<button class="bg-primary text-on-primary hover:bg-primary/90 transition-colors rounded-full px-6 py-3 font-caption text-caption flex items-center gap-xs shadow-[0_0_20px_rgba(173,198,255,0.2)]">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                    Add Application
+                </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Chrome Card -->
+<div class="bg-surface-container-low backdrop-blur-md rounded-xl border border-white/10 p-md flex flex-col gap-md hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="public">public</span>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Google Chrome</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 font-caption text-caption mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> Detected
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-md z-10 mt-auto">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all toggle-label"></div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Startup</span>
+</div>
+<button class="border border-white/10 hover:border-primary hover:text-primary text-on-surface-variant px-4 py-1.5 rounded-full font-caption text-caption transition-colors">
+                            Launch
+                        </button>
+</div>
+</div>
+<!-- VS Code Card -->
+<div class="bg-surface-container-low backdrop-blur-md rounded-xl border border-white/10 p-md flex flex-col gap-md hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="code">code</span>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">VS Code</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 font-caption text-caption mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> Detected
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-md z-10 mt-auto">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all toggle-label"></div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Startup</span>
+</div>
+<button class="border border-white/10 hover:border-primary hover:text-primary text-on-surface-variant px-4 py-1.5 rounded-full font-caption text-caption transition-colors">
+                            Launch
+                        </button>
+</div>
+</div>
+<!-- Spotify Card -->
+<div class="bg-surface-container-low backdrop-blur-md rounded-xl border border-white/10 p-md flex flex-col gap-md hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="music_note">music_note</span>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Spotify</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 font-caption text-caption mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> Detected
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-md z-10 mt-auto">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all toggle-label"></div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Startup</span>
+</div>
+<button class="border border-white/10 hover:border-primary hover:text-primary text-on-surface-variant px-4 py-1.5 rounded-full font-caption text-caption transition-colors">
+                            Launch
+                        </button>
+</div>
+</div>
+<!-- File Explorer Card -->
+<div class="bg-surface-container-low backdrop-blur-md rounded-xl border border-white/10 p-md flex flex-col gap-md hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="folder_open">folder_open</span>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">File Explorer</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary border border-secondary/30 font-caption text-caption mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1.5"></span> Detected
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-md z-10 mt-auto">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer toggle-checkbox" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all toggle-label"></div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Startup</span>
+</div>
+<button class="border border-white/10 hover:border-primary hover:text-primary text-on-surface-variant px-4 py-1.5 rounded-full font-caption text-caption transition-colors">
+                            Launch
+                        </button>
+</div>
+</div>
+<!-- Edge Card -->
+<div class="bg-surface-container-low backdrop-blur-md rounded-xl border border-white/10 p-md flex flex-col gap-md hover:border-primary/50 transition-colors group relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="explore">explore</span>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Microsoft Edge</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant border border-white/10 font-caption text-caption mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline mr-1.5"></span> Not Detected
+                                </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-md z-10 mt-auto opacity-50 pointer-events-none">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer toggle-checkbox" disabled="" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all toggle-label"></div>
+</label>
+<span class="font-caption text-caption text-on-surface-variant">Startup</span>
+</div>
+<button class="border border-white/10 text-on-surface-variant px-4 py-1.5 rounded-full font-caption text-caption">
+                            Launch
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOVA Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-fixed": "#0b1c30",
+                "on-primary-container": "#00285d",
+                "inverse-on-surface": "#313030",
+                "on-secondary-fixed-variant": "#005236",
+                "surface-container-low": "#1c1b1b",
+                "inverse-surface": "#e5e2e1",
+                "secondary": "#4edea3",
+                "error": "#ffb4ab",
+                "outline": "#8c909f",
+                "on-primary": "#002e6a",
+                "surface-container-highest": "#353534",
+                "inverse-primary": "#005ac2",
+                "on-surface-variant": "#c2c6d6",
+                "tertiary-fixed": "#d3e4fe",
+                "on-tertiary": "#213145",
+                "secondary-container": "#00a572",
+                "tertiary-container": "#8292aa",
+                "surface": "#131313",
+                "primary": "#adc6ff",
+                "background": "#131313",
+                "tertiary-fixed-dim": "#b7c8e1",
+                "on-surface": "#e5e2e1",
+                "on-tertiary-fixed-variant": "#38485d",
+                "outline-variant": "#424754",
+                "tertiary": "#b7c8e1",
+                "on-primary-fixed": "#001a42",
+                "surface-tint": "#adc6ff",
+                "on-secondary-container": "#00311f",
+                "error-container": "#93000a",
+                "secondary-fixed-dim": "#4edea3",
+                "on-tertiary-container": "#1a2b3e",
+                "surface-container": "#201f1f",
+                "secondary-fixed": "#6ffbbe",
+                "on-background": "#e5e2e1",
+                "surface-variant": "#353534",
+                "surface-container-high": "#2a2a2a",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-dim": "#131313",
+                "on-error": "#690005",
+                "surface-bright": "#3a3939",
+                "primary-container": "#4d8eff",
+                "on-primary-fixed-variant": "#004395",
+                "on-secondary-fixed": "#002113",
+                "primary-fixed-dim": "#adc6ff",
+                "on-secondary": "#003824",
+                "on-error-container": "#ffdad6",
+                "primary-fixed": "#d8e2ff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "xs": "0.5rem",
+                "sm": "1rem",
+                "margin-mobile": "16px",
+                "md": "1.5rem",
+                "xl": "4rem",
+                "unit": "4px",
+                "gutter": "24px",
+                "lg": "2.5rem",
+                "margin-desktop": "48px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Inter"
+                ],
+                "caption": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "label-mono": [
+                        "JetBrains Mono"
+                ],
+                "display-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "caption": [
+                        "12px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-mono": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body {
+        background-color: #0A0A0A;
+        color: #e5e2e1;
+    }
+    .glass-panel {
+        background: rgba(18, 18, 18, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .ai-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .5; }
+    }
+</style>
+</head>
+<body class="font-body-md text-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 py-lg px-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked left-0 w-64 border-r border-white/10 shadow-xl z-50">
+<div class="flex items-center gap-sm mb-xl px-4">
+<img alt="NOVA Brand Logo" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsgb7fucD4SQ6vpPRI7didxAqHXlg28riqHx6acn9Mkez7iU0FygJFk_0jXYwhcjN8dAJ3bWKUbx6nZjqG1ORopou5aLIm1HXU82u01x1xbyIuV6Wbd-aC2N_8xErYHIrUyBuvXJpmcmUzPZurrz0zYSATbSJG74bhxAUQYsJDW6jsvqWQokUu8WG3jhIM18icHqiHqAc6dZB2apddPDB4JUi5Wwl6R16gst6F7tz1rGuOsoOxNW9KvA"/>
+<div>
+<div class="font-display-lg text-display-lg font-bold text-primary tracking-tighter" style="font-size: 24px; line-height: 1.1;">NOVA</div>
+<div class="font-caption text-caption text-on-surface-variant">AI PC Agent</div>
+</div>
+</div>
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-primary font-bold border-r-2 border-primary hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Startup</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">apps</span>
+<span>Apps</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">browser_updated</span>
+<span>Browser</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span>Tasks</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>Logs</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-4 w-full mb-8">
+<button class="w-full bg-error text-on-error font-body-md text-body-md py-2 rounded-lg hover:bg-error-container transition-colors font-medium">Stop Agent</button>
+</div>
+<ul class="flex flex-col gap-2 pt-4 border-t border-white/10">
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span>Status</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-desktop h-20 bg-background/50 dark:bg-background/50 backdrop-blur-md sticky top-0 right-0 z-40">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Good Morning</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your PC automation agent is ready.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 bg-secondary/10 px-3 py-1.5 rounded-full border border-secondary/20">
+<div class="w-2 h-2 rounded-full bg-secondary ai-pulse"></div>
+<span class="font-label-mono text-label-mono text-secondary">ONLINE</span>
+</div>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-margin-desktop">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Primary Agent Card (Bento span 8) -->
+<div class="lg:col-span-8 glass-panel rounded-xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+<!-- Background decorative element -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="relative z-10 flex justify-between items-start mb-8">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high border border-white/10 flex items-center justify-center relative shadow-lg">
+<div class="absolute inset-0 bg-primary/20 rounded-2xl blur-md"></div>
+<span class="material-symbols-outlined text-primary text-3xl relative z-10">smart_toy</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold">NOVA Agent</h2>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-2 h-2 rounded-full bg-secondary ai-pulse"></div>
+<span class="font-caption text-caption text-on-surface-variant">Running efficiently</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container border border-white/10 px-4 py-2 rounded-lg flex flex-col items-end">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase text-[10px]">CPU Load</span>
+<span class="font-body-lg text-body-lg text-primary font-medium">12%</span>
+</div>
+</div>
+<div class="relative z-10 grid grid-cols-2 gap-4 mb-8">
+<div class="bg-[#000000] border border-white/5 rounded-lg p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-outline text-sm">rocket_launch</span>
+<span class="font-caption text-caption text-outline">Startup Automation</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Enabled</span>
+</div>
+<div class="bg-[#000000] border border-white/5 rounded-lg p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-outline text-sm">wifi</span>
+<span class="font-caption text-caption text-outline">Internet</span>
+</div>
+<span class="font-body-md text-body-md text-secondary font-medium">Connected</span>
+</div>
+<div class="bg-[#000000] border border-white/5 rounded-lg p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-outline text-sm">public</span>
+<span class="font-caption text-caption text-outline">Chrome</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Available</span>
+</div>
+<div class="bg-[#000000] border border-white/5 rounded-lg p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-outline text-sm">person</span>
+<span class="font-caption text-caption text-outline">Profile</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Default</span>
+</div>
+</div>
+<div class="relative z-10 flex gap-4 mt-auto">
+<button class="bg-error/10 text-error border border-error/20 font-body-md text-body-md font-medium px-6 py-3 rounded-lg hover:bg-error/20 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">stop_circle</span>
+                        Stop Agent
+                    </button>
+<button class="bg-surface-container-high text-on-surface border border-white/10 font-body-md text-body-md font-medium px-6 py-3 rounded-lg hover:bg-surface-container-highest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">restart_alt</span>
+                        Restart
+                    </button>
+</div>
+</div>
+<!-- Quick Actions (Bento span 4, vertical stack) -->
+<div class="lg:col-span-4 flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold mb-2">Quick Actions</h3>
+<button class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:bg-white/5 transition-colors group text-left">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">play_circle</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-medium">Open YouTube</div>
+<div class="font-caption text-caption text-on-surface-variant">Media workflow</div>
+</div>
+</button>
+<button class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:bg-white/5 transition-colors group text-left">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">web</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-medium">Open Chrome</div>
+<div class="font-caption text-caption text-on-surface-variant">Default browser</div>
+</div>
+</button>
+<button class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:bg-white/5 transition-colors group text-left">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">rocket_launch</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-medium">Run Startup Workflow</div>
+<div class="font-caption text-caption text-on-surface-variant">Execute routine</div>
+</div>
+</button>
+<button class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:bg-white/5 transition-colors group text-left">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center border border-white/5 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">menu_book</span>
+</div>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-medium">Open Study Setup</div>
+<div class="font-caption text-caption text-on-surface-variant">Focus mode layout</div>
+</div>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NOVA - Agent Tasks</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-primary-container": "#00285d",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#4edea3",
+                        "error": "#ffb4ab",
+                        "outline": "#8c909f",
+                        "on-primary": "#002e6a",
+                        "surface-container-highest": "#353534",
+                        "inverse-primary": "#005ac2",
+                        "on-surface-variant": "#c2c6d6",
+                        "tertiary-fixed": "#d3e4fe",
+                        "on-tertiary": "#213145",
+                        "secondary-container": "#00a572",
+                        "tertiary-container": "#8292aa",
+                        "surface": "#131313",
+                        "primary": "#adc6ff",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "outline-variant": "#424754",
+                        "tertiary": "#b7c8e1",
+                        "on-primary-fixed": "#001a42",
+                        "surface-tint": "#adc6ff",
+                        "on-secondary-container": "#00311f",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-tertiary-container": "#1a2b3e",
+                        "surface-container": "#201f1f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-background": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "surface-bright": "#3a3939",
+                        "primary-container": "#4d8eff",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#002113",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary": "#003824",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#d8e2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "margin-mobile": "16px",
+                        "md": "1.5rem",
+                        "xl": "4rem",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "lg": "2.5rem",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-mono": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+        }
+        
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-input {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-input:focus-within {
+            border-color: #adc6ff;
+            box-shadow: 0 0 15px rgba(173, 198, 255, 0.2);
+        }
+        
+        .glow-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(173, 198, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(173, 198, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(173, 198, 255, 0); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-hidden flex h-screen w-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 top-0 py-lg px-sm bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked left-0 h-full w-64 border-r border-white/10 shadow-xl z-50">
+<!-- Brand -->
+<div class="flex items-center gap-4 mb-xl px-4">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30 relative">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<div>
+<h1 class="font-display-lg text-display-lg font-bold text-primary tracking-tighter text-[28px]">NOVA</h1>
+<p class="font-caption text-caption text-on-surface-variant">AI PC Agent</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="rocket_launch">rocket_launch</span>
+<span>Startup</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="apps">apps</span>
+<span>Apps</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="browser_updated">browser_updated</span>
+<span>Browser</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary font-bold border-r-2 border-primary bg-white/5 transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="assignment" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span>Tasks</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="terminal">terminal</span>
+<span>Logs</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-white/5 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined group-active:scale-95 duration-150" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<!-- Footer / System Actions -->
+<div class="mt-auto space-y-4 pt-6 border-t border-white/5">
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-lg border border-error/30 text-error hover:bg-error/10 transition-all font-medium">
+<span class="material-symbols-outlined text-[18px]">stop_circle</span>
+<span>Stop Agent</span>
+</button>
+<div class="flex items-center justify-between px-2">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-caption text-caption">Profile</span>
+</a>
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-caption text-caption">Status</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 h-full relative z-10">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-desktop h-20 bg-background/50 dark:bg-background/50 backdrop-blur-md border-b border-white/5 z-40 sticky top-0">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">Agent Tasks</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/10 rounded-full p-2 transition-colors active:opacity-80">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+</button>
+<div class="ml-4 w-10 h-10 rounded-full overflow-hidden border border-white/10 ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A futuristic minimalist user profile avatar with subtle glowing blue accents against a deep obsidian background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsJvTGlyWIdAxMny1hhU8EESPWRlFS5Lw2X11R33CisNSN4FfQfwIoLbYn6jHHDyid4XpJ5lSlZgbEphDNpUCmjXVmpuhgcIbpsG809ovJ5aOMg56NqMILZ9d-fIwdorh0IyFm6PMIBUIL5KAjD0psPmUxFRiv_Cvc4-QQw6gE9Xv1-L3poTQD96ysaWGNU5F1wL-vSaSbhldz_-kK4OeEBjO13URKDUkwGQHINLIDH9QZyktfOKi5vg"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop pb-32">
+<div class="max-w-5xl mx-auto space-y-xl">
+<!-- Command Input Area -->
+<section class="glass-panel rounded-xl p-md md:p-lg relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">What should NOVA do?</h3>
+<div class="glass-input rounded-lg flex items-center p-2 relative">
+<div class="pl-4 pr-2 text-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<input class="flex-1 bg-transparent border-none text-on-surface font-label-mono text-label-mono focus:ring-0 placeholder:text-on-surface-variant/50 h-12" placeholder="e.g. 'Setup development environment for project X'..." type="text"/>
+<div class="flex items-center gap-2 pr-2">
+<button class="p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<button class="bg-primary text-on-primary-fixed h-10 px-6 rounded-md font-body-md font-medium hover:bg-primary-container transition-colors flex items-center gap-2 shadow-lg shadow-primary/20">
+<span>Execute</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-caption font-caption text-on-surface-variant mr-2 self-center">Suggestions:</span>
+<button class="px-3 py-1.5 rounded-full border border-white/10 text-label-mono font-label-mono text-xs text-on-surface-variant hover:border-primary/50 hover:text-primary transition-colors bg-surface/50">Run system diagnostics</button>
+<button class="px-3 py-1.5 rounded-full border border-white/10 text-label-mono font-label-mono text-xs text-on-surface-variant hover:border-primary/50 hover:text-primary transition-colors bg-surface/50">Organize downloads folder</button>
+<button class="px-3 py-1.5 rounded-full border border-white/10 text-label-mono font-label-mono text-xs text-on-surface-variant hover:border-primary/50 hover:text-primary transition-colors bg-surface/50">Update all local repos</button>
+</div>
+</section>
+<!-- Recent Tasks Board -->
+<section>
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-body-lg text-body-lg font-semibold text-on-surface">Recent Tasks</h3>
+<button class="text-primary font-caption text-caption hover:underline flex items-center gap-1">
+<span>View All History</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-2">
+<!-- Task 1: Running -->
+<div class="glass-panel rounded-lg p-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-l-secondary group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-secondary/10 to-transparent opacity-50"></div>
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center border border-white/10 flex-shrink-0 z-10">
+<span class="material-symbols-outlined text-secondary">code</span>
+</div>
+<div class="flex-1 min-w-0 z-10">
+<h4 class="font-body-md text-body-md text-on-surface truncate">Open VS Code</h4>
+<p class="font-caption text-caption text-on-surface-variant truncate font-label-mono mt-0.5">Initializing workspace environment</p>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0 z-10">
+<span class="px-2 py-0.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20 font-caption text-[10px] uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary glow-pulse"></span>
+                                    Running
+                                </span>
+<span class="font-label-mono text-xs text-on-surface-variant/50">00:00:45</span>
+</div>
+</div>
+<!-- Task 2: Completed -->
+<div class="glass-panel rounded-lg p-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center border border-white/10 flex-shrink-0">
+<span class="material-symbols-outlined text-primary">play_circle</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface truncate">Open YouTube</h4>
+<p class="font-caption text-caption text-on-surface-variant truncate mt-0.5">Launched in Default Browser</p>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-caption text-[10px] uppercase tracking-wider">
+                                    Completed
+                                </span>
+<span class="font-label-mono text-xs text-on-surface-variant/50">2 mins ago</span>
+</div>
+</div>
+<!-- Task 3: Completed -->
+<div class="glass-panel rounded-lg p-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center border border-white/10 flex-shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">school</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface truncate">Start Study Setup</h4>
+<p class="font-caption text-caption text-on-surface-variant truncate mt-0.5">Focus mode enabled, Notion opened</p>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 font-caption text-[10px] uppercase tracking-wider">
+                                    Completed
+                                </span>
+<span class="font-label-mono text-xs text-on-surface-variant/50">1 hour ago</span>
+</div>
+</div>
+<!-- Task 4: Failed -->
+<div class="glass-panel rounded-lg p-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer border-l-2 border-l-error group">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center border border-white/10 flex-shrink-0">
+<span class="material-symbols-outlined text-error">build</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface truncate">Compile Docker Containers</h4>
+<p class="font-caption text-caption text-error truncate mt-0.5">Error: Daemon not responsive</p>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0">
+<span class="px-2 py-0.5 rounded-full bg-error/10 text-error border border-error/20 font-caption text-[10px] uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[10px]">warning</span>
+                                    Failed
+                                </span>
+<span class="font-label-mono text-xs text-on-surface-variant/50">3 hours ago</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Global Background Elements for depth -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px]"></div>
+</div>
+</body></html>

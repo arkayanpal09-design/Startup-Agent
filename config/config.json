@@ -1,0 +1,11 @@
+{
+    "startup_enabled": true,
+    "startup_delay_seconds": 10,
+    "wait_for_network": true,
+    "network_timeout_seconds": 30,
+    "network_retry_interval_seconds": 5,
+    "chrome_profile": "Default",
+    "startup_urls": [
+        "https://www.youtube.com"
+    ]
+}
